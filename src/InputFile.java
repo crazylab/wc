@@ -6,13 +6,13 @@ import java.io.IOException;
 public class InputFile {
     final String fileName;
 
-    Content fileDetails;
+    Content fileDetails = null;
 
     InputFile(String fileName){
         this.fileName = fileName;
     }
 
-    public void read() throws FileNotFoundException, IOException{
+    private void read() throws FileNotFoundException, IOException{
         File file = new File(this.fileName);
         int fileSize = (int) file.length();
         char[] s = new char[fileSize];
@@ -22,15 +22,21 @@ public class InputFile {
         fileDetails = new Content(data);
     }
 
-    public void printWordCount(){
+    public void printWordCount() throws FileNotFoundException, IOException{
+        if(fileDetails == null)
+            read();
         System.out.println("Word : "+ fileDetails.wordCount());
     }
 
-    public void printCharCount(){
+    public void printCharCount() throws FileNotFoundException, IOException{
+        if(fileDetails == null)
+            read();
         System.out.println("Char : "+ fileDetails.charCount());
     }
 
-    public void printLineCount(){
+    public void printLineCount() throws FileNotFoundException, IOException{
+        if(fileDetails == null)
+            read();
         System.out.println("Line : "+ fileDetails.lineCount());
     }
 }
